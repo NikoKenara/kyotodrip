@@ -18,14 +18,14 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@email.com',
                 'role' => 'admin',
-                'password' => 'password'
+                'password' => '$2y$12$fpDpGnbMDSBJqjI7kxeEzOSQYNj6ITHnjJNbvi7YbHzhuRCbxPKru'
 
             ],
             [
                 'name' => 'user',
                 'email' => 'user@email.com',
                 'role' => 'user',
-                'password' => 'password'
+                'password' => '$2y$12$fpDpGnbMDSBJqjI7kxeEzOSQYNj6ITHnjJNbvi7YbHzhuRCbxPKru'
             ]
         ]);
     }

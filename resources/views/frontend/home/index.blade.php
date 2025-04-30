@@ -24,9 +24,11 @@
     ==============================-->
     @include('frontend.home.components.offer-item')
 
-    <!-- CART POPUT START -->
+    <!-- CART POPUP START -->
+
     @include('frontend.home.components.cart-popup')
-    <!-- CART POPUT END -->
+
+    <!-- CART POPUP END -->
 
     <!--=============================
         OFFER ITEM END
@@ -36,7 +38,7 @@
     <!--=============================
         MENU ITEM START
     ==============================-->
-        @include('frontend.home.components.menu-item')
+    @include('frontend.home.components.menu-item')
     <!--=============================
         MENU ITEM END
     ==============================-->
@@ -70,7 +72,7 @@
 
 
     <!--=============================
-       TESTIMONIAL  START
+        TESTIMONIAL  START
     ==============================-->
     @include('frontend.home.components.testimonial')
     <!--=============================

@@ -74,7 +74,7 @@
 </nav>
 
 <div class="fp__menu_cart_area">
-    <div class="fp__menu_cart_boody">
+    <div class="fp__menu_cart_body">
         <div class="fp__menu_cart_header">
             <h5>total item (05)</h5>
             <span class="close_cart"><i class="fal fa-times"></i></span>

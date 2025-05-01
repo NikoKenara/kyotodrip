@@ -8,17 +8,17 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     <title>FoodPark || Restaurant Template</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="{{ 'frontend/css/all.min.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/bootstrap.min.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/spacing.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/slick.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/nice-select.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/venobox.min.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/animate.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/jquery.exzoom.css' }}">
-
-    <link rel="stylesheet" href="{{ 'frontend/css/style.css' }}">
-    <link rel="stylesheet" href="{{ 'frontend/css/responsive.css' }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/spacing.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery.exzoom.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -108,9 +108,20 @@
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
     <!-- ex zoom js -->
     <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
-
+    {{-- toastr js --}}
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
     <!--main/custom js-->
     <script src="js/main.js"></script>
+
+    <script>
+        // toastr.options.progressBar = true;
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
+    </script>
 
 </body>
 

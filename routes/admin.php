@@ -9,6 +9,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     // profile routes
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile', [ProfileController::class, 'UpdateProfile'])->name('profile.update');
 });
 
 

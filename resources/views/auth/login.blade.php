@@ -115,13 +115,13 @@
                                     <div class="col-xl-12">
                                         {{-- LOGIN BUTTON --}}
                                         <div class="fp__login_imput">
-                                            <button type="submit" class="common_btn">login</button>
+                                            <button type="submit" class="common_btn">Login</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                             {{-- CREATE ACCOUNT --}}
-                            <p class="create_account">Don't have an account ? <a href="sign_up.html">Create Account</a>
+                            <p class="create_account">Don't have an account ? <a href="{{ route('register') }}">Create Account</a>
                             </p>
                         </div>
                     </div>

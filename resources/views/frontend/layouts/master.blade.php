@@ -111,10 +111,12 @@
     {{-- toastr js --}}
     <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
     <!--main/custom js-->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+    {{-- show dynamic validation message --}}
 
     <script>
-        // toastr.options.progressBar = true;
+        toastr.options.progressBar = true;
 
         @if ($errors->any())
             @foreach ($errors->all() as $error)

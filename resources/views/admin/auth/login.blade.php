@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input id="email" type="email" class="form-control" name="email"
-                                            tabindex="1" required autofocus>
+                                            tabindex="1" required autofocus value="{{ old('email') }}">
                                         <div class="invalid-feedback">
                                             Please fill in your email
                                         </div>

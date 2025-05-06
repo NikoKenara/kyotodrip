@@ -17,6 +17,7 @@ class ProfileController extends Controller
     }
 
     function updateProfile(ProfileUpdateRequest $request):RedirectResponse {
+        dd($request->all());
 
         $user = Auth::user();
 

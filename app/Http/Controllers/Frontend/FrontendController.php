@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
     function index() : View {
-        function index() : View{
-            return view('frontend.home.index');
-        }
+        return view('frontend.home.index');
     }
 }

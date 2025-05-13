@@ -36,11 +36,14 @@
                         <div class="fp__dashboard_menu">
                             <div class="dasboard_header">
                                 <div class="dasboard_header_img">
-                                    <img src="images/comment_img_2.png" alt="user" class="img-fluid w-100">
+                                    <img src="{{ auth()->user()->avatar }}" alt="user" class="img-fluid w-100">
                                     <label for="upload"><i class="far fa-camera"></i></label>
+                                    <form id="avatar_form">
+                                        <input type="file" id="upload" hidden name="avatar">
+                                    </form>
                                     <input type="file" id="upload" hidden>
                                 </div>
-                                <h2>hasib ahmed</h2>
+                                <h2>{{ auth()->user()->name }}</h2>
                             </div>
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
@@ -1221,3 +1224,14 @@
             DASHBOARD END
         ==========================-->
 @endsection
+
+
+@push('scripts')
+        <script>
+            $(document).ready(function(){
+                $('#upload').on('change', function(){
+                    
+                })
+            })
+        </script>
+@endpush

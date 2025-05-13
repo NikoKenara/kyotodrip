@@ -30,6 +30,9 @@ class ProfileController extends Controller
         toastr()->success('Password Updated Successfully!');
 
         return redirect()->back();
+    }
 
+    function updateAvatar(Request $request) {
+        dd($request->all()); 
     }
 }

@@ -81,7 +81,6 @@
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
                                     <button class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();" type="button"><span> <i class="fas fa-sign-out-alt"></i> </span> Logout</button>
                                 </form>
                             </div>

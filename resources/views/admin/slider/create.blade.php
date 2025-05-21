@@ -18,7 +18,7 @@
                         <label>Image</label>
                         <div id="image-preview" class="image-preview">
                             <label for="image-upload" id="image-label">Choose File</label>
-                            <input type="file" name="avatar" id="image-upload" />
+                            <input type="file" name="image" id="image-upload" />
                         </div>
                     </div>
 

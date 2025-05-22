@@ -30,4 +30,10 @@ trait FileUploadTrait
 
         return NULL;
     }
+
+    function removeImage(string $path) : void {
+        if(File::exists(public_path($path))){
+            File::delete(public_path($path));
+        }
+    }
 }

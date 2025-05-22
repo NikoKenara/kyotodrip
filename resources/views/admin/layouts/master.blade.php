@@ -96,16 +96,18 @@
         });
 
         // set csrf at ajax header
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
+
 
         $(document).ready(function() {
 
             $('body').on('click', '.delete-item', function(e) {
                 e.preventDefault()
+
                 let url = $(this).attr('href');
 
                 Swal.fire({
@@ -122,13 +124,14 @@
                         $.ajax({
                             method: 'DELETE',
                             url: url,
+                            data: {_token: "{{ csrf_token() }}"},
                             success: function(response) {
-                                if(response.status === 'success'){
+                                if (response.status === 'success') {
                                     toastr.success(response.message)
 
-                                    $('#slider-table').DataTable().draw();
-                                    
-                                } else if(response.status === 'error'){
+                                    window.location.reload()
+
+                                } else if (response.status === 'error') {
                                     toastr.success(response.message)
                                 }
                             },

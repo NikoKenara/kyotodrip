@@ -37,11 +37,9 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
 
     <section class="section">
-
         <div class="card card-primary">
             <div class="card-header">
                 <h4>All Items</h4>

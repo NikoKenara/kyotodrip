@@ -12,14 +12,14 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.why-choose-us.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
                         <label>Icon</label>
                         <br>
                         <!-- Button tag -->
-                        <button class="btn btn-primary" role="iconpicker"></button>
+                        <button class="btn btn-primary" role="iconpicker" name="icon"></button>
                     </div>
 
                     <div class="form-group">

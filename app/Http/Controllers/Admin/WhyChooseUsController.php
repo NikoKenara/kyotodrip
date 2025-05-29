@@ -20,6 +20,7 @@ class WhyChooseUsController extends Controller
     {
         $key = ['why_choose_top_title', 'why_choose_main_title', 'why_choose_sub_title'];
         $titles = SectionTitle::whereIn('key', $key)->pluck('value', 'key');
+
         return $dataTable->render('admin.why-choose-us.index', compact('titles'));
     }
 

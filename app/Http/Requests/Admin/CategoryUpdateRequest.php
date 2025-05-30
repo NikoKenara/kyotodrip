@@ -4,14 +4,14 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryCreateRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return true ;
     }
 
     /**
@@ -22,7 +22,7 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255', 'unique:categories,name'],
+            'name' => ['required', 'max:255', 'unique:categories,name,'.$this->category],
             'show_at_home' => ['required', 'boolean'],
             'status' => ['required', 'boolean'],
         ];

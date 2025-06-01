@@ -12,7 +12,7 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -72,6 +72,13 @@
                         <label>Seo Description</label>
                         <textarea name="seo_description" class="form-control" id="">{{ old('seo_description') }}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label>Show at Home</label>
+                        <select name="show_at_home" class="form-control" id="">
+                            <option value="1">Yes</option>
+                            <option selected value="0">No</option>
+                        </select>
 
                     <div class="form-group">
                         <label>Status</label>

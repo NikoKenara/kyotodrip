@@ -8,7 +8,7 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Create Category</h4>
+                <h4>Edit Category</h4>
 
             </div>
             <div class="card-body">

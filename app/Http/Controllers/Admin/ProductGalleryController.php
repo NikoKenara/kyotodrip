@@ -25,14 +25,6 @@ class ProductGalleryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) : RedirectResponse
@@ -55,30 +47,6 @@ class ProductGalleryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id) : Response
@@ -90,7 +58,7 @@ class ProductGalleryController extends Controller
 
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         }catch(\Exception $e){
-            return response(['status' => 'error', 'message' => $e->getMessage()]);
+            return response(['status' => 'error', 'message' => 'Something Went Wrong!']);
 
         }
     }

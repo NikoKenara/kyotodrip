@@ -12,8 +12,9 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     <div class="form-group">
                         <label>Image</label>
@@ -87,7 +88,7 @@
                             <option @selected($product->status === 0) value="0">Inactive</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

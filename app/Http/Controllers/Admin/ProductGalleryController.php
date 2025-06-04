@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\ProductGallery;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class ProductGalleryController extends Controller
@@ -15,9 +17,11 @@ class ProductGalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $ProductId) : View
+    public function index(string $productId) : View
     {
-        return view('admin.product.gallery.index', compact('ProductId'));
+        $images = ProductGallery::where('product_id', $productId)->get();
+        $product = Product::findOrFail($productId);
+        return view('admin.product.gallery.index', compact('product', 'images'));
     }
 
     /**
@@ -77,8 +81,17 @@ class ProductGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id) : Response
     {
-        //
+        try{
+            $image = ProductGallery::findOrFail($id);
+            $this->removeImage($image->image);
+            $image->delete();
+
+            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+        }catch(\Exception $e){
+            return response(['status' => 'error', 'message' => $e->getMessage()]);
+
+        }
     }
 }

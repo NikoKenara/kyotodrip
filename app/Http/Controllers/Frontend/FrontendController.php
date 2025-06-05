@@ -13,24 +13,20 @@ use Illuminate\Support\Collection;
 
 class FrontendController extends Controller
 {
-    function index() : View {
+    function index(): View
+    {
         $sectionTitles = $this->getSectionTitles();
 
         $sliders = Slider::where('status', 1)->get();
-
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
 
         $categories = Category::where(['show_at_home' => 1, 'status' => 1])->get();
 
-        return view('frontend.home.index',
-        compact(
-            'sliders',
-        'sectionTitles',
-        'whyChooseUs',
-        'categories'));
+        return view('frontend.home.index', compact('sliders', 'sectionTitles', 'whyChooseUs', 'categories'));
     }
 
-    function getSectionTitles() : Collection {
+    function getSectionTitles(): Collection
+    {
         $key = [
             'why_choose_top_title',
             'why_choose_main_title',

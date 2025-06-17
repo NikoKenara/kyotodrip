@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\Admin\ProductOptionController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\ProfileController as ControllersProfileController;
@@ -47,5 +48,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     // Product Option Routes
     Route::resource('product-option', ProductOptionController::class);
+
+    // Setting Routes
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
 
 });

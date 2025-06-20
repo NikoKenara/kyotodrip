@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-        BREADCRUMB START
-    ==============================-->
+            BREADCRUMB START
+        ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-        BREADCRUMB END
-    ==============================-->
+            BREADCRUMB END
+        ==============================-->
 
 
     <!--=============================
-        MENU DETAILS START
-    ==============================-->
+            MENU DETAILS START
+        ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -32,10 +32,12 @@
                     <div class="exzoom hidden" id="exzoom">
                         <div class="exzoom_img_box fp__menu_details_images">
                             <ul class='exzoom_img_ul'>
-                                <li><img class="zoom ing-fluid w-100" src="{{ asset($product->thumb_image) }}" alt="product"></li>
+                                <li><img class="zoom ing-fluid w-100" src="{{ asset($product->thumb_image) }}"
+                                        alt="product"></li>
 
                                 @foreach ($product->productImages as $image)
-                                <li><img class="zoom ing-fluid w-100" src="{{ asset($image->image) }}" alt="product"></li>
+                                    <li><img class="zoom ing-fluid w-100" src="{{ asset($image->image) }}" alt="product">
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -50,7 +52,7 @@
                 </div>
                 <div class="col-lg-7 wow fadeInUp" data-wow-duration="1s">
                     <div class="fp__menu_details_text">
-                        <h2>{!!  $product->name !!}</h2>
+                        <h2>{!! $product->name !!}</h2>
                         <p class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -61,44 +63,44 @@
                         </p>
                         <h3 class="price">
                             @if ($product->offer_price > 0)
-                            Rp{{ $product->offer_price }}
-                            <del>Rp{{ $product->price }}</del>
+                                {{ currencyPosition($product->offer_price) }}
+                                <del>{{ currencyPosition($product->price) }}</del>
                             @else
-                            Rp{{ $product->price }}
+                                {{ currencyPosition($product->price) }}
                             @endif
 
                         </h3>
-                        <p class="short_description">{!!  $product->short_description !!}</p>
+                        <p class="short_description">{!! $product->short_description !!}</p>
 
                         @if ($product->productSizes()->exists())
-                        <div class="details_size">
-                            <h5>select size</h5>
+                            <div class="details_size">
+                                <h5>select size</h5>
 
-                            @foreach ($product->productSizes as $productSize)
-
-                            @endforeach
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="option-{{ $productSize->id }}" checked>
-                                <label class="form-check-label" for="option-{{ $productSize->id }}">
-                                    {{ $productSize->name }} <span>+ Rp{{ $productSize->price }}</span>
-                                </label>
+                                @foreach ($product->productSizes as $productSize)
+                                @endforeach
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="option-{{ $productSize->id }}" checked>
+                                    <label class="form-check-label" for="option-{{ $productSize->id }}">
+                                        {{ $productSize->name }} <span>+ Rp{{ $productSize->price }}</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
                         @endif
 
                         @if ($product->productOptions()->exists())
-                        <div class="details_extra_item">
-                            <h5>select option <span>(optional)</span></h5>
-                            @foreach ($product->productOptions as $productOption)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="option-{{ $productOption->id }}">
-                                <label class="form-check-label" for="option-{{ $productOption->id }}">
-                                    {{ $productOption->name }} <span>+ Rp{{ $productOption->price }}</span>
-                                </label>
+                            <div class="details_extra_item">
+                                <h5>select option <span>(optional)</span></h5>
+                                @foreach ($product->productOptions as $productOption)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="option-{{ $productOption->id }}">
+                                        <label class="form-check-label" for="option-{{ $productOption->id }}">
+                                            {{ $productOption->name }} <span>+ Rp{{ $productOption->price }}</span>
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
-
-                            @endforeach
-                        </div>
                         @endif
 
                         <div class="details_quentity">
@@ -136,7 +138,7 @@
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab" tabindex="0">
                                 <div class="menu_det_description">
-                                {!!  $product->long_description !!}
+                                    {!! $product->long_description !!}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel"
@@ -238,8 +240,7 @@
                                                             <input type="email" placeholder="Email">
                                                         </div>
                                                         <div class="col-xl-12">
-                                                            <textarea rows="3"
-                                                                placeholder="Write your review"></textarea>
+                                                            <textarea rows="3" placeholder="Write your review"></textarea>
                                                         </div>
                                                         <div class="col-12">
                                                             <button class="common_btn" type="submit">submit
@@ -257,47 +258,49 @@
                 </div>
             </div>
             @if (count($relatedProducts) > 0)
-            <div class="fp__related_menu mt_90 xs_mt_60">
-                <h2>related item</h2>
-                <div class="row related_product_slider">
-                    @foreach ($relatedProducts as $relatedProduct)
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="fp__menu_item">
-                            <div class="fp__menu_item_img">
-                                <img src="{{ asset($relatedProduct->thumb_image) }}" alt="{{ $relatedProduct->name }}" class="img-fluid w-100">
-                                <a class="category" href="#">{{ @$relatedProduct->category->name }}</a>
-                            </div>
-                            <div class="fp__menu_item_text">
-                                <p class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span>74</span>
-                                </p>
-                                <a class="title" href="{{ route('product.show', $relatedProduct->slug) }}">{!! $relatedProduct->name !!}</a>
-                                <h5 class="price">
-                                    @if ($relatedProduct->offer_price > 0)
-                                    Rp{{ $relatedProduct->offer_price }}
-                                    <del>Rp{{ $relatedProduct->price }}</del>
-                                    @else
-                                    Rp{{ $relatedProduct->price }}
-                                    @endif
+                <div class="fp__related_menu mt_90 xs_mt_60">
+                    <h2>related item</h2>
+                    <div class="row related_product_slider">
+                        @foreach ($relatedProducts as $relatedProduct)
+                            <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
+                                <div class="fp__menu_item">
+                                    <div class="fp__menu_item_img">
+                                        <img src="{{ asset($relatedProduct->thumb_image) }}"
+                                            alt="{{ $relatedProduct->name }}" class="img-fluid w-100">
+                                        <a class="category" href="#">{{ @$relatedProduct->category->name }}</a>
+                                    </div>
+                                    <div class="fp__menu_item_text">
+                                        <p class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                            <span>74</span>
+                                        </p>
+                                        <a class="title"
+                                            href="{{ route('product.show', $relatedProduct->slug) }}">{!! $relatedProduct->name !!}</a>
+                                        <h5 class="price">
+                                            @if ($product->offer_price > 0)
+                                                {{ currencyPosition($product->offer_price) }}
+                                                <del>{{ currencyPosition($product->price) }}</del>
+                                            @else
+                                                {{ currencyPosition($product->price) }}
+                                            @endif
 
-                                </h5>
-                                <ul class="d-flex flex-wrap justify-content-center">
-                                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
-                                                class="fas fa-shopping-basket"></i></a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                </ul>
+                                        </h5>
+                                        <ul class="d-flex flex-wrap justify-content-center">
+                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
+                                                        class="fas fa-shopping-basket"></i></a></li>
+                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
             @endif
         </div>
     </section>
@@ -328,20 +331,22 @@
                             <div class="details_size">
                                 <h5>select size</h5>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="large01"
-                                        checked>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="large01" checked>
                                     <label class="form-check-label" for="large01">
                                         large <span>+ $350</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium01">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="medium01">
                                     <label class="form-check-label" for="medium01">
                                         medium <span>+ $250</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="small01">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="small01">
                                     <label class="form-check-label" for="small01">
                                         small <span>+ $150</span>
                                     </label>
@@ -387,6 +392,6 @@
     <!-- CART POPUT END -->
 
     <!--=============================
-        MENU DETAILS END
-    ==============================-->
-  @endsection
+            MENU DETAILS END
+        ==============================-->
+@endsection

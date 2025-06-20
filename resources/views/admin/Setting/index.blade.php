@@ -45,7 +45,10 @@
                                             <label for="">Default Currency</label>
                                             <select name="site_default_currency" id=""
                                                 class="select2 form-control">
-                                                <option value="rp">Rupiah</option>
+                                                <option value="rp">Select</option>
+                                                @foreach (config('currencies.currency_list') as $currency)
+                                                <option @selected(config('settings.site_default_currency') === $currency) value="{{ $currency }}">{{ $currency }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 

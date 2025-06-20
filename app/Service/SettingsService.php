@@ -6,18 +6,19 @@ use App\Models\Setting;
 use Cache;
 
 class SettingsService {
+
     function getSettings() {
-        return Cache rememberForever('settings', function(){
+        return Cache::rememberForever('settings', function(){
             return Setting::pluck('value', 'key')->toArray();
         });
     }
 
-    function setGlobalSettings() {
+    function setGlobalSettings() : void {
         $settings = $this->getSettings();
         config()->set('settings', $settings);
     }
 
-    function clearCachedSettings() {
+    function clearCachedSettings() : void {
         Cache::forget('settings');
     }
 }

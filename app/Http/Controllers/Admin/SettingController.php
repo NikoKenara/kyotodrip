@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Service\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -29,6 +30,9 @@ class SettingController extends Controller
                 ['value' => $value]
             );
         }
+
+        $settingService = app(SettingsService::class);
+        $settingService->clearCachedSettings();
 
         toastr()->success('Updated Successfully!');
 

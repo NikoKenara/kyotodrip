@@ -35,7 +35,8 @@
                 @foreach ($product->productSizes as $productSize)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" value="{{ $productSize->id }}"
-                            data-price="{{ $productSize->price }}" name="product_size" id="size-{{ $productSize->id }}">
+                            data-price="{{ $productSize->price }}" name="product_size"
+                            id="size-{{ $productSize->id }}">
                         <label class="form-check-label" for="size-{{ $productSize->id }}">
                             {{ $productSize->name }} <span>+ {{ currencyPosition($productSize->price) }}</span>
                         </label>
@@ -57,13 +58,6 @@
                         </label>
                     </div>
                 @endforeach
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="7up">
-                    <label class="form-check-label" for="7up">
-                        7up <span>+ $15</span>
-                    </label>
-                </div>
             </div>
         @endif
 
@@ -75,7 +69,11 @@
                     <input type="text" placeholder="1">
                     <button class="btn btn-success"><i class="fal fa-plus"></i></button>
                 </div>
-                <h3>$320.00</h3>
+                @if ($product->offer_price > 0)
+                    <h3 id="total_price">{{ currencyPosition($product->offer_price) }}</h3>
+                @else
+                    <h3 id="total_price">{{ currencyPosition($product->price) }}</h3>
+                @endif
             </div>
         </div>
         <ul class="details_button_area d-flex flex-wrap">
@@ -91,18 +89,34 @@
             updateTotalPrice();
         });
 
+        $('input[name="product_option[]"]').on('change', function() {
+            updateTotalPrice();
+        });
+
         // function to update the total price, based on selected options
         function updateTotalPrice() {
             let basePrice = parseFloat($('input[name="base_price"]').val());
             let selectedSizePrice = 0;
-            let selectedOptionPrice = 0;
+            let selectedOptionsPrice = 0;
 
             // calculate the selected size price
             let selectedSize = $('input[name="product_size"]:checked');
-            if(selectedSize.length > 0){
+            if (selectedSize.length > 0) {
                 selectedSizePrice = parseFloat(selectedSize.data("price"));
             }
-            alert(selectedSizePrice);
+
+            // calculate selected options price
+            let selectedOptions = $('input[name="product_option[]"]:checked');
+            $(selectedOptions).each(function() {
+                selectedOptionsPrice += parseFloat($(this).data("price"));
+            })
+
+            // calculate the total price
+            let totalPrice = basePrice + selectedSizePrice + selectedOptionsPrice;
+
+            $('#total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
         }
+
+
     })
 </script>

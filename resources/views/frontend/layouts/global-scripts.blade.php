@@ -5,6 +5,7 @@
             method: 'GET',
             url: '{{ route("load-product-modal", ":productId") }}'.replace(':productId', productId),
             beforeSend: function(){
+                $('.overlay-container').removeClass('d-none')
                 $('.overlay').addClass('active');
             },
             success: function(response){
@@ -16,6 +17,7 @@
             },
             complete: function(){
                 $('.overlay').removeClass('active');
+                $('.overlay-container').addClass('d-none');
             }
         })
     }

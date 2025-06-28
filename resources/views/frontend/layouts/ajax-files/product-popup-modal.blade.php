@@ -96,7 +96,7 @@
 
         // event handlers for increment/decrement buttons
 
-        $('.increment').on('click', function(e){
+        $('.increment').on('click', function(e) {
             e.preventDefault()
 
             let quantity = $('#quantity');
@@ -105,12 +105,12 @@
             updateTotalPrice()
         })
 
-        $('.decrement').on('click', function(e){
+        $('.decrement').on('click', function(e) {
             e.preventDefault()
 
             let quantity = $('#quantity');
             let currentQuantity = parseFloat(quantity.val());
-            if(currentQuantity > 1){
+            if (currentQuantity > 1) {
                 quantity.val(currentQuantity - 1);
                 updateTotalPrice()
             }
@@ -142,18 +142,28 @@
         }
 
         // add to cart function
-        $('#modal_add_to_cart_form').on('submit', function(e){
+        $('#modal_add_to_cart_form').on('submit', function(e) {
             e.preventDefault();
-            let formData = $(this).serialize();
 
+            // validation
+            let selectedSize = $("input[name='product_size']");
+            if (selectedSize.length > 0) {
+                if ($("input[name='product_size']:checked").val() === undefined) {
+                    toastr.error('Please select a size');
+                    console.error('Please select a size');
+                    return;
+                }
+            }
+
+            let formData = $(this).serialize();
             $.ajax({
                 method: 'POST',
-                url: '{{ route("add-to-cart") }}',
+                url: '{{ route('add-to-cart') }}',
                 data: formData,
-                success: function(response){
+                success: function(response) {
 
                 },
-                error: function(xhr, status, error){
+                error: function(xhr, status, error) {
                     console.error(error);
                 }
             })

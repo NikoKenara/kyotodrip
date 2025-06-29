@@ -9,12 +9,11 @@
                         </a>
                         <span>There are many variations of Lorem Ipsum available, but the majority have
                             suffered.</span>
-                        <p class="info"><i class="far fa-map-marker-alt"></i> 7232 Broadway Suite 308, Jackson
-                            Heights, 11372, NY, United States</p>
+                        <p class="info"><i class="far fa-map-marker-alt"></i> (Address)</p>
                         <a class="info" href="callto:1234567890123"><i class="fas fa-phone-alt"></i>
-                            +1347-430-9510</a>
+                            +62 347-430-9510</a>
                         <a class="info" href="mailto:websolutionus1@gmail.com"><i class="fas fa-envelope"></i>
-                            websolutionus1@gmail.com</a>
+                            email@email.com</a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-4 col-md-6">
@@ -23,9 +22,9 @@
                         <ul>
                             <li><a href="#">Home</a></li>
                             <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            {{-- <li><a href="#">Contact Us</a></li>
                             <li><a href="#">Our Service</a></li>
-                            <li><a href="#">gallery</a></li>
+                            <li><a href="#">gallery</a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -43,20 +42,20 @@
                 </div>
                 <div class="col-lg-3 col-sm-8 col-md-6 order-lg-4">
                     <div class="fp__footer_content">
-                        <h3>subscribe</h3>
+                        {{-- <h3>subscribe</h3>
                         <form>
                             <input type="text" placeholder="Subscribe">
-                            <button>Subscribe</button>
+                            <button>Subscribe</button> --}}
                         </form>
                         <div class="fp__footer_social_link">
                             <h5>follow us:</h5>
                             <ul class="d-flex flex-wrap">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                {{-- <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li> --}}
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                {{-- <li><a href="#"><i class="fab fa-behance"></i></a></li> --}}
                                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                {{-- <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li> --}}
                             </ul>
                         </div>
                     </div>

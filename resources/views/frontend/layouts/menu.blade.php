@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg main_menu">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="FoodPark" class="img-fluid">
+                <img src="images/logo.png" alt="Restaurant" class="img-fluid">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="menu.html">menu</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="chefs.html">chefs</a>
                     </li>
                     <li class="nav-item">
@@ -45,7 +45,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">contact</a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <ul class="menu_icon d-flex flex-wrap">
                     <li>
@@ -87,10 +87,13 @@
                     </div>
                     <div class="menu_cart_text">
                         <a class="title" href="{{ route('product.show', $cartProduct->options->product_info['slug']) }}">{!! $cartProduct->name !!}</a>
+
                         <p class="size">Qty: {{ $cartProduct->qty }}</p>
-                        <p class="size">{{ @$cartProduct->options->product_size['name'] }}</p>
+
+                        <p class="size">{{ @$cartProduct->options->product_size['name'] }} {{ @$cartProduct->options->product_size['price'] ? '('.currencyPosition(@$cartProduct->options->product_size['price']).')' : '' }}</p>
+
                         @foreach ($cartProduct->options->product_options as $cartProductOption)
-                        <span class="extra">{{ $cartProductOption['name'] }}</span>
+                        <span class="extra">{{ $cartProductOption['name'] }} ({{ $cartProductOption['price'] }})</span>
                         @endforeach
                         <p class="price">{{ currencyPosition($cartProduct->price) }}</p>
                     </div>
@@ -98,7 +101,7 @@
                 </li>
                 @endforeach
             </ul>
-            <p class="subtotal">sub total <span>$1220.00</span></p>
+            <p class="subtotal">sub total <span>{{ currencyPosition(cartTotal()) }}</span></p>
             <a class="cart_view" href="cart_view.html"> view cart</a>
             <a class="checkout" href="check_out.html">checkout</a>
         </div>

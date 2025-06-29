@@ -23,7 +23,7 @@ class CartController extends Controller
             $options = [
                 'product_size' => [],
                 'product_options' => [],
-                'product-info' => [
+                'product_info' => [
                     'image' => $product->thumb_image,
                     'slug' => $product->slug
                 ]

@@ -7,7 +7,8 @@ use App\Models\Product;
 use App\Models\ProductSize;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Collection;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
@@ -15,7 +16,7 @@ class CartController extends Controller
     function addToCart(Request $request)
     {
 
-        try{
+        try {
             $product = Product::with(['productSizes', 'productOptions'])->findOrFail($request->product_id);
             $productSize = $product->productSizes->where('id', $request->product_size)->first();
             $productOptions = $product->productOptions->whereIn('id', $request->product_option);
@@ -29,8 +30,8 @@ class CartController extends Controller
                 ]
             ];
 
-            if($productSize !== null){
-                $options['product_size'][] = [
+            if ($productSize !== null) {
+                $options['product_size'] = [
                     'id' => $productSize?->id,
                     'name' => $productSize?->name,
                     'price' => $productSize?->price
@@ -51,15 +52,16 @@ class CartController extends Controller
                 'qty' => $request->quantity,
                 'price' => $product->offer_price,
                 'weight' => 0,
-                'options' =>$options
+                'options' => $options
             ]);
 
             return response(['status' => 'success', 'message' => 'Product added into cart'], 200);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'Something went wrong'], 500);
         }
-
     }
 
+    function getCartProduct() {
+        return view('frontend.layouts.ajax-files.sidebar-cart-item')->render();
+    }
 }
-

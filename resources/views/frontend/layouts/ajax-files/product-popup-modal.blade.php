@@ -158,7 +158,7 @@
             let formData = $(this).serialize();
             $.ajax({
                 method: 'POST',
-                url: '{{ route('add-to-cart') }}',
+                url: '{{ route("add-to-cart") }}',
                 data: formData,
                 beforeSend: function() {
                     $('.modal_cart_button').attr('disabled', true);

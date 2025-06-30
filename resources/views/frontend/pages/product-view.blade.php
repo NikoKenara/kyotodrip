@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                BREADCRUMB START
-                            ==============================-->
+                                    BREADCRUMB START
+                                ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                BREADCRUMB END
-                            ==============================-->
+                                    BREADCRUMB END
+                                ==============================-->
 
 
     <!--=============================
-                                MENU DETAILS START
-                            ==============================-->
+                                    MENU DETAILS START
+                                ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -84,15 +84,16 @@
                                     <h5>select size</h5>
 
                                     @foreach ($product->productSizes as $productSize)
-                                    @endforeach
                                     <div class="form-check">
                                         <input class="form-check-input v_product_size" type="radio" name="product_size"
-                                            id="option-{{ $productSize->id }}" data-price="{{ $productSize->price }}" value="{{ $productSize->id }}">
+                                            id="option-{{ $productSize->id }}" data-price="{{ $productSize->price }}"
+                                            value="{{ $productSize->id }}">
                                         <label class="form-check-label" for="option-{{ $productSize->id }}">
-                                            {{ $productSize->name }} <span>+
-                                                {{ currencyPosition($productSize->price) }}</span>
+                                            {{ $productSize->name }} <span>+ {{ currencyPosition($productSize->price) }}</span>
                                         </label>
                                     </div>
+                                    @endforeach
+
                                 </div>
                             @endif
 
@@ -102,7 +103,8 @@
                                     @foreach ($product->productOptions as $productOption)
                                         <div class="form-check">
                                             <input class="form-check-input v_product_option" name="product_option[]"
-                                                type="checkbox" value="{{ $productOption->id }}" id="option-{{ $productOption->id }}"
+                                                type="checkbox" value="{{ $productOption->id }}"
+                                                id="option-{{ $productOption->id }}"
                                                 data-price="{{ $productOption->price }}">
                                             <label class="form-check-label" for="option-{{ $productOption->id }}">
                                                 {{ $productOption->name }} <span>+
@@ -118,7 +120,7 @@
                                 <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                                     <div class="quentity_btn">
                                         <button class="btn btn-danger v_decrement"><i class="fal fa-minus"></i></button>
-                                        <input type="text" name="qty" placeholder="1" value="1" readonly
+                                        <input type="text" name="quantity" placeholder="1" value="1" readonly
                                             id="v_quantity">
                                         <button class="btn btn-success v_increment"><i class="fal fa-plus"></i></button>
                                     </div>
@@ -141,8 +143,8 @@
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true">Description</button>
+                                    data-bs-target="#pills-home" type="button" role="tab"
+                                    aria-controls="pills-home" aria-selected="true">Description</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
@@ -408,8 +410,8 @@
     <!-- CART POPUT END -->
 
     <!--=============================
-                                MENU DETAILS END
-                            ==============================-->
+                                    MENU DETAILS END
+                                ==============================-->
 @endsection
 
 
@@ -418,7 +420,7 @@
         $(document).ready(function() {
             $('.v_product_size').prop('checked', false);
             $('.v_product_option').prop('checked', false);
-            $('#v_quantity').vall(1);
+            $('#v_quantity').val(1);
             $('.v_product_size').on('change', function() {
                 v_updateTotalPrice();
             });
@@ -473,19 +475,18 @@
                 $('#v_total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
             }
 
-            $('v_submit_button').on('click', function(e){
+            $('.v_submit_button').on('click', function(e) {
                 e.preventDefault();
-                $('#modal_add_to_cart_form').submit();
+                $('#v_add_to_cart_form').submit();
             })
-
             // add to cart function
-            $('#modal_add_to_cart_form').on('submit', function(e) {
+            $('#v_add_to_cart_form').on('submit', function(e) {
                 e.preventDefault();
 
                 // validation
-                let selectedSize = $("v_product_size");
+                let selectedSize = $(".v_product_size");
                 if (selectedSize.length > 0) {
-                    if ($("v_product_size:checked").val() === undefined) {
+                    if ($(".v_product_size:checked").val() === undefined) {
                         toastr.error('Please select a size');
                         console.error('Please select a size');
                         return;
@@ -495,20 +496,20 @@
                 let formData = $(this).serialize();
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route("add-to-cart") }}',
+                    url: '{{ route('add-to-cart') }}',
                     data: formData,
                     beforeSend: function() {
                         $('.v_submit_button').attr('disabled', true);
                         $('.v_submit_button').html(
                             '<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Loading...'
-                            )
+                        )
                     },
                     success: function(response) {
                         updateSidebarCart();
                         toastr.success(response.message);
                     },
                     error: function(xhr, status, error) {
-                        let errorMessgae = xhr.responseJSON.message;
+                        let errorMessage = xhr.responseJSON.message;
                         toastr.error(errorMessgae);
                     },
                     complete: function() {

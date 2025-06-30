@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                BREADCRUMB START
-            ==============================-->
+                    BREADCRUMB START
+                ==============================-->
     <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                BREADCRUMB END
-            ==============================-->
+                    BREADCRUMB END
+                ==============================-->
 
 
     <!--============================
-                CART VIEW START
-            ==============================-->
+                    CART VIEW START
+                ==============================-->
     <section class="fp__cart_view mt_125 xs_mt_95 mb_100 xs_mb_70">
         <div class="container">
             <div class="row">
@@ -67,10 +67,12 @@
                                             </td>
 
                                             <td class="fp__pro_name">
-                                                <a href="{{ route('product.show', $product->options->product_info['slug']) }}">{{ $product->name }}</a>
-                                                <span>{{ @$product->options->product_size['name'] }} {{ @$product->options->product_size['price'] ? currencyPosition(@$product->options->product_size['price']) : '' }}</span>
+                                                <a
+                                                    href="{{ route('product.show', $product->options->product_info['slug']) }}">{{ $product->name }}</a>
+                                                <span>{{ @$product->options->product_size['name'] }}
+                                                    {{ @$product->options->product_size['price'] ? currencyPosition(@$product->options->product_size['price']) : '' }}</span>
                                                 @foreach ($product->options->product_options as $option)
-                                                <p>{{ $option['name'] }} ({{ currencyPosition($option['price']) }})</p>
+                                                    <p>{{ $option['name'] }} ({{ currencyPosition($option['price']) }})</p>
                                                 @endforeach
                                             </td>
 
@@ -80,9 +82,12 @@
 
                                             <td class="fp__pro_select">
                                                 <div class="quentity_btn">
-                                                    <button class="btn btn-danger decrement"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" class="quantity" data-id="{{ $product->rowId }}" placeholder="1" value="1" value="{{ $product->qty }}" readonly>
-                                                    <button class="btn btn-success increment"><i class="fal fa-plus"></i></button>
+                                                    <button class="btn btn-danger decrement"><i
+                                                            class="fal fa-minus"></i></button>
+                                                    <input type="text" class="quantity" data-id="{{ $product->rowId }}"
+                                                        placeholder="1" value="1" value="{{ $product->qty }}" readonly>
+                                                    <button class="btn btn-success increment"><i
+                                                            class="fal fa-plus"></i></button>
                                                 </div>
                                             </td>
 
@@ -119,56 +124,56 @@
         </div>
     </section>
     <!--============================
-                CART VIEW END
-            ==============================-->
+                    CART VIEW END
+                ==============================-->
 @endsection
 
 @push('scripts')
-<script>
-    $(document).ready(function(){
-        $('.increment').on('click', function(){
-            let inputField = $(this).siblings(".quantity");
-            let currentValue = parseInt(inputField.val());
-            let rowId = inputField.data("id");
-            inputField.val(currentValue + 1);
-
-            cartQtyUpdate(rowId, inputField.val());
-        });
-
-        $('.decrement').on('click', function(){
-            let inputField = $(this).siblings(".quantity");
-            let currentValue = parseInt(inputField.val());
-            let rowId = inputField.data("id");
-
-            if(inputField.val() > 1){
-                inputField.val(currentValue - 1);
+    <script>
+        $(document).ready(function() {
+            $('.increment').on('click', function() {
+                let inputField = $(this).siblings(".quantity");
+                let currentValue = parseInt(inputField.val());
+                let rowId = inputField.data("id");
+                inputField.val(currentValue + 1);
 
                 cartQtyUpdate(rowId, inputField.val());
-            }
-        });
+            });
 
-        function cartQtyUpdate(rowId, qty){
-            $.ajax({
-                method:'post',
-                url: '{{ route("cart.quantity-update") }}',
-                data: {
-                    'rowId' : rowId,
-                    'qty' : qty
-                },
-                beforeSend: function(){
-                    //
-                },
-                success:function(response){
-                    //
-                },
-                error: function(xhr, status, error){
-                    //
-                },
-                complete: function(){
-                    //
+            $('.decrement').on('click', function() {
+                let inputField = $(this).siblings(".quantity");
+                let currentValue = parseInt(inputField.val());
+                let rowId = inputField.data("id");
+
+                if (inputField.val() > 1) {
+                    inputField.val(currentValue - 1);
+
+                    cartQtyUpdate(rowId, inputField.val());
                 }
-            })
-        }
-    })
-</script>
+            });
+
+            function cartQtyUpdate(rowId, qty) {
+                $.ajax({
+                    method: 'post',
+                    url: '{{ route('cart.quantity-update') }}',
+                    data: {
+                        'rowId': rowId,
+                        'qty': qty
+                    },
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {},
+                    error: function(xhr, status, error) {
+                        let errorMessage = xhr.responseJSON.message;
+                        hideLoader();
+                        toastr.error(errorMessage);
+                    },
+                    complete: function() {
+                        hideLoader();
+                    }
+                })
+            }
+        })
+    </script>
 @endpush

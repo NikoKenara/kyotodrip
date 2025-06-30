@@ -1,4 +1,16 @@
 <script>
+    // show loader
+    function showLoader(){
+        $('.overlay-container').removeClass('d-none');
+        $('.overlay').addClass('active');
+    }
+
+    // hide loader
+    function hideLoader(){
+        $('.overlay').removeClass('active');
+        $('.overlay-container').addClass('d-none');
+    }
+    
     // load product modal
     function loadProductModal(productId) {
         $.ajax({

@@ -87,4 +87,9 @@ class CartController extends Controller
             return response(['status' => 'success', 'message' => 'Something went wrong (please reload page)'], 500);
         }
     }
+
+    function cartDestroy() {
+        Cart::destroy();
+        return redirect()->back();
+    }
 }

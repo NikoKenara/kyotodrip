@@ -92,7 +92,7 @@
                                             </td>
 
                                             <td class="fp__pro_tk">
-                                                <h6>$180,00</h6>
+                                                <h6 class="product_cart_total">{{ currencyPosition(productTotal($product->rowId)) }}</h6>
                                             </td>
 
                                             <td class="fp__pro_icon">
@@ -137,7 +137,13 @@
                 let rowId = inputField.data("id");
                 inputField.val(currentValue + 1);
 
-                cartQtyUpdate(rowId, inputField.val());
+                cartQtyUpdate(rowId, inputField.val(), function(response){
+                    let productTotal = response.product_total;
+                    inputField.closest("tr")
+                    .find(".product_cart_total")
+                    .text("{{ currencyPosition(":productTotal") }}"
+                    .replace(":product"))
+                });
             });
 
             $('.decrement').on('click', function() {
@@ -148,11 +154,17 @@
                 if (inputField.val() > 1) {
                     inputField.val(currentValue - 1);
 
-                    cartQtyUpdate(rowId, inputField.val());
+                    cartQtyUpdate(rowId, inputField.val(), function(response){
+                    let productTotal = response.product_total;
+                    inputField.closest("tr")
+                    .find(".product_cart_total")
+                    .text("{{ currencyPosition(":productTotal") }}"
+                    .replace(":product"))
+                });
                 }
             });
 
-            function cartQtyUpdate(rowId, qty) {
+            function cartQtyUpdate(rowId, qty, callback) {
                 $.ajax({
                     method: 'post',
                     url: '{{ route('cart.quantity-update') }}',
@@ -163,7 +175,11 @@
                     beforeSend: function() {
                         showLoader();
                     },
-                    success: function(response) {},
+                    success: function(response) {
+                        if(callback && typeof callback === 'function'){
+                            callback(response);
+                        }
+                    },
                     error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;
                         hideLoader();

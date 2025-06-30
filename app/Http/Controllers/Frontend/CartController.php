@@ -81,7 +81,7 @@ class CartController extends Controller
     function cartQtyUpdate(Request $request) : Response {
         try{
             Cart::update($request->rowId, $request->qty);
-            return response(['status' => 'success', 'message' => 'Updated Cart Successfully'], 200);
+            return response(['product_total' => productTotal($request->rowId)], 200);
         }catch(\Exception $e){
             logger($e);
             return response(['status' => 'success', 'message' => 'Something went wrong (please reload page)'], 500);

@@ -59,7 +59,7 @@
                         </div>
                     </li>
                     <li>
-                        <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span>5</span></a>
+                        <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span class="cart_count">{{ count(Cart::content()) }}</span></a>
                     </li>
                     <li>
                         <a href="dashboard.html"><i class="fas fa-user"></i></a>
@@ -76,7 +76,7 @@
     <div class="fp__menu_cart_area">
         <div class="fp__menu_cart_boody">
             <div class="fp__menu_cart_header">
-                <h5>total item (05)</h5>
+                <h5>total item (<span class="cart_count">{{ count(Cart::content()) }}</span>)</h5>
                 <span class="close_cart"><i class="fal fa-times"></i></span>
             </div>
             <ul class="cart_contents">
@@ -93,7 +93,7 @@
                         <p class="size">{{ @$cartProduct->options->product_size['name'] }} {{ @$cartProduct->options->product_size['price'] ? '('.currencyPosition(@$cartProduct->options->product_size['price']).')' : '' }}</p>
 
                         @foreach ($cartProduct->options->product_options as $cartProductOption)
-                        <span class="extra">{{ $cartProductOption['name'] }} ({{ $cartProductOption['price'] }})</span>
+                        <span class="extra">{{ $cartProductOption['name'] }} ({{ currencyPosition($cartProductOption['price']) }})</span>
                         @endforeach
                         <p class="price">{{ currencyPosition($cartProduct->price) }}</p>
                     </div>

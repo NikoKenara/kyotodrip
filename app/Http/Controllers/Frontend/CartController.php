@@ -12,6 +12,9 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
+    function index() : View {
+        return view('frontend.pages.cart-view');
+    }
     // add product in to cart
     function addToCart(Request $request)
     {

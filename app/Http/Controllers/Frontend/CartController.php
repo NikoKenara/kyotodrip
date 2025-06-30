@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductSize;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
@@ -74,6 +75,16 @@ class CartController extends Controller
             return response(['status' => 'success', 'message' => 'Item has been removed!'], 200);
         }catch(\Exception $e){
             return response(['status' => 'error', 'message' => 'Something went wrong! '], 500);
+        }
+    }
+
+    function cartQtyUpdate(Request $request) : Response {
+        try{
+            Cart::update($request->rowId, $request->qty);
+            return response(['status' => 'success', 'message' => 'Updated Cart Successfully']);
+        }catch(\Exception $e){
+            logger($e);
+            return response(['status' => 'success', 'message' => 'Something went wrong']);
         }
     }
 }

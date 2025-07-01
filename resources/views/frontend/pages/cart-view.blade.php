@@ -85,7 +85,7 @@
                                                     <button class="btn btn-danger decrement"><i
                                                             class="fal fa-minus"></i></button>
                                                     <input type="text" class="quantity" data-id="{{ $product->rowId }}"
-                                                        placeholder="1" value="1" value="{{ $product->qty }}" readonly>
+                                                        placeholder="1" value="{{ $product->qty }}" readonly>
                                                     <button class="btn btn-success increment"><i
                                                             class="fal fa-plus"></i></button>
                                                 </div>
@@ -139,14 +139,16 @@
                 let inputField = $(this).siblings(".quantity");
                 let currentValue = parseInt(inputField.val());
                 let rowId = inputField.data("id");
-                inputField.val(currentValue + 1);
+
 
                 cartQtyUpdate(rowId, inputField.val(), function(response){
+                    inputField.val(response.qty);
+
                     let productTotal = response.product_total;
                     inputField.closest("tr")
                     .find(".product_cart_total")
                     .text("{{ currencyPosition(":productTotal") }}"
-                    .replace(":product"))
+                    .replace(":productTotal", productTotal));
                 });
             });
 
@@ -156,14 +158,14 @@
                 let rowId = inputField.data("id");
 
                 if (inputField.val() > 1) {
-                    inputField.val(currentValue - 1);
-
                     cartQtyUpdate(rowId, inputField.val(), function(response){
+                    inputField.val(response.qty);
+
                     let productTotal = response.product_total;
                     inputField.closest("tr")
                     .find(".product_cart_total")
                     .text("{{ currencyPosition(":productTotal") }}"
-                    .replace(":product"))
+                    .replace(":productTotal", productTotal));
                 });
                 }
             });

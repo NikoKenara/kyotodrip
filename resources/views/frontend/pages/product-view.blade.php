@@ -420,7 +420,7 @@
                     },
                     error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;
-                        toastr.error(errorMessgae);
+                        toastr.error(errorMessage);
                     },
                     complete: function() {
                         $('.v_submit_button').html('Add to cart');

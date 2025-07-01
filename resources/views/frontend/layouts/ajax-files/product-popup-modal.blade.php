@@ -169,8 +169,8 @@
                     toastr.success(response.message);
                 },
                 error: function(xhr, status, error) {
-                    let errorMessgae = xhr.responseJSON.message;
-                    toastr.error(errorMessgae);
+                    let errorMessage = xhr.responseJSON.message;
+                    toastr.error(errorMessage);
                 },
                 complete: function(){
                     $('.modal_cart_button').html('Add to cart');

@@ -67,6 +67,7 @@ if(!function_exists('productTotal')) {
             $productPrice = $product->price;
             $sizePrice = $product->options?->product_size['price'] ?? 0;
             $optionsPrice = 0;
+            
             foreach ($product->options->product_options as $option) {
                 $optionsPrice += $option['price'];
             }

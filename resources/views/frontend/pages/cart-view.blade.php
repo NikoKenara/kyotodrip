@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                    BREADCRUMB START
-                ==============================-->
+                        BREADCRUMB START
+                    ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                    BREADCRUMB END
-                ==============================-->
+                        BREADCRUMB END
+                    ==============================-->
 
 
     <!--============================
-                    CART VIEW START
-                ==============================-->
+                        CART VIEW START
+                    ==============================-->
     <section class="fp__cart_view mt_125 xs_mt_95 mb_100 xs_mb_70">
         <div class="container">
             <div class="row">
@@ -92,18 +92,21 @@
                                             </td>
 
                                             <td class="fp__pro_tk">
-                                                <h6 class="product_cart_total">{{ currencyPosition(productTotal($product->rowId)) }}</h6>
+                                                <h6 class="product_cart_total">
+                                                    {{ currencyPosition(productTotal($product->rowId)) }}</h6>
                                             </td>
 
                                             <td class="fp__pro_icon">
-                                                <a href="#" class="reomove_cart_product" data-id="{{ $product->rowId }}"><i class="far fa-times"></i></a>
+                                                <a href="#" class="reomove_cart_product"
+                                                    data-id="{{ $product->rowId }}"><i class="far fa-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
                                     @if (Cart::content()->count() === 0)
-                                    <tr>
-                                        <td colspan="6" class="text-center fp__pro_name" style="width: 100%;display: inline;">Cart is empty!</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="6" class="text-center fp__pro_name"
+                                                style="width: 100%;display: inline;">Cart is empty!</td>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
@@ -128,8 +131,8 @@
         </div>
     </section>
     <!--============================
-                    CART VIEW END
-                ==============================-->
+                        CART VIEW END
+                    ==============================-->
 @endsection
 
 @push('scripts')
@@ -140,15 +143,21 @@
                 let currentValue = parseInt(inputField.val());
                 let rowId = inputField.data("id");
 
+                inputField.val(currentValue + 1);
 
-                cartQtyUpdate(rowId, inputField.val(), function(response){
-                    inputField.val(response.qty);
+                cartQtyUpdate(rowId, inputField.val(), function(response) {
+                    if (response.status === 'success') {
+                        inputField.val(response.qty);
 
-                    let productTotal = response.product_total;
-                    inputField.closest("tr")
-                    .find(".product_cart_total")
-                    .text("{{ currencyPosition(":productTotal") }}"
-                    .replace(":productTotal", productTotal));
+                        let productTotal = response.product_total;
+                        inputField.closest("tr")
+                            .find(".product_cart_total")
+                            .text("{{ currencyPosition(':productTotal') }}"
+                            .replace(":productTotal", productTotal));
+                    } else if (response.status === 'error') {
+                        inputField.val(response.qty);
+                        toastr.error(response.message)
+                    }
                 });
             });
 
@@ -157,23 +166,31 @@
                 let currentValue = parseInt(inputField.val());
                 let rowId = inputField.data("id");
 
-                if (inputField.val() > 1) {
-                    cartQtyUpdate(rowId, inputField.val(), function(response){
-                    inputField.val(response.qty);
+                inputField.val(currentValue - 1);
 
-                    let productTotal = response.product_total;
-                    inputField.closest("tr")
-                    .find(".product_cart_total")
-                    .text("{{ currencyPosition(":productTotal") }}"
-                    .replace(":productTotal", productTotal));
-                });
+                if (inputField.val() > 1) {
+
+                    cartQtyUpdate(rowId, inputField.val(), function(response) {
+                        if (response.status === 'success') {
+                            inputField.val(response.qty);
+
+                            let productTotal = response.product_total;
+                            inputField.closest("tr")
+                                .find(".product_cart_total")
+                                .text("{{ currencyPosition(':productTotal') }}"
+                                .replace(":productTotal", productTotal));
+                        }else if (response.status === 'error') {
+                        inputField.val(response.qty);
+                        toastr.error(response.message)
+                    }
+                    });
                 }
             });
 
             function cartQtyUpdate(rowId, qty, callback) {
                 $.ajax({
                     method: 'post',
-                    url: '{{ route('cart.quantity-update') }}',
+                    url: '{{ route("cart.quantity-update") }}',
                     data: {
                         'rowId': rowId,
                         'qty': qty
@@ -182,7 +199,7 @@
                         showLoader();
                     },
                     success: function(response) {
-                        if(callback && typeof callback === 'function'){
+                        if (callback && typeof callback === 'function') {
                             callback(response);
                         }
                     },
@@ -197,17 +214,17 @@
                 })
             }
 
-            $('.reomove_cart_product').on('click', function(e){
+            $('.reomove_cart_product').on('click', function(e) {
                 e.preventDefault();
                 let rowId = $(this).data('id');
                 removeCartProduct(rowId);
                 $(this).closest('tr').remove();
             })
 
-            function removeCartProduct(rowId){
+            function removeCartProduct(rowId) {
                 $.ajax({
                     method: 'get',
-                    url: '{{ route("cart-product-remove", ":rowId") }}'. replace(":rowId", rowId),
+                    url: '{{ route("cart-product-remove", ":rowId") }}'.replace(":rowId", rowId),
                     beforeSend: function() {
                         showLoader();
                     },

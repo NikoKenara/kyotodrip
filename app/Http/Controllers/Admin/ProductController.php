@@ -22,7 +22,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ProductDataTable $dataTable) : View|JsonResponse
+    public function index(ProductDataTable $dataTable): View|JsonResponse
     {
         return $dataTable->render('admin.product.index');
     }
@@ -30,7 +30,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         $categories = Category::all();
         return view('admin.product.create', compact('categories'));
@@ -39,7 +39,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductCreateRequest $request) : RedirectResponse
+    public function store(ProductCreateRequest $request): RedirectResponse
     {
         // handle image file
         $imagePath = $this->uploadImage($request, 'image');
@@ -47,9 +47,11 @@ class ProductController extends Controller
         $product = new Product();
         $product->thumb_image = $imagePath;
         $product->name = $request->name;
+        $product->slug = generateUniqueSlug('Product', $request->name);
         $product->category_id = $request->category;
         $product->price = $request->price;
-        $product->offer_price = $request->offer_price;
+        $product->offer_price = $request->offer_price ?? 0;
+        $product->quantity = $request->quantity;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
         $product->sku = $request->sku;
@@ -62,13 +64,12 @@ class ProductController extends Controller
         toastr()->success('Created Successfully');
 
         return to_route('admin.product.index');
-
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $categories = Category::all();
         $product = Product::findOrFail($id);
@@ -87,10 +88,10 @@ class ProductController extends Controller
 
         $product->thumb_image = !empty($imagePath) ? $imagePath : $product->thumb_image;
         $product->name = $request->name;
-        $product->slug = generateUniqueSlug('Product', $request->name);
         $product->category_id = $request->category;
         $product->price = $request->price;
-        $product->offer_price = $request->offer_price;
+        $product->offer_price = $request->offer_price ?? 0;
+        $product->quantity = $request->quantity;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
         $product->sku = $request->sku;
@@ -108,18 +109,16 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
-        try{
+        try {
             $product = Product::findOrFail($id);
             $this->removeImage($product->thumb_image);
             $product->delete();
 
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'Something Went Wrong!']);
-
         }
     }
 }

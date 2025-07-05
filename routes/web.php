@@ -30,6 +30,7 @@ Route::group([], function(){
     Route::put('profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+    Route::post('address', [DashboardController::class, 'createAddress'])->name('address.store');
 });
 
 require __DIR__.'/auth.php';

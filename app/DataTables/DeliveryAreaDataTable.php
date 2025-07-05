@@ -22,7 +22,23 @@ class DeliveryAreaDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'deliveryarea.action')
+            ->addColumn('action', function($query){
+                $edit = "<a href='".route('admin.slider.edit', $query->id)."' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
+                $delete = "<a href='".route('admin.slider.destroy', $query->id)."' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
+
+                return $edit.$delete;
+            })
+            ->addColumn('delivery_fee', function($query){
+                return currencyPosition($query->delivery_fee);
+            })
+            ->addColumn('status', function ($query) {
+                if ($query->status === 1) {
+                    return '<span class="badge badge-primary">Active</span>';
+                }else {
+                    return '<span class="badge badge-danger">Inactive</span>';
+                }
+            })
+            ->rawColumns(['action', 'status'])
             ->setRowId('id');
     }
 
@@ -40,20 +56,20 @@ class DeliveryAreaDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('deliveryarea-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('deliveryarea-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -62,15 +78,18 @@ class DeliveryAreaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('area_name'),
+            Column::make('delivery_fee'),
+            Column::make('min_delivery_time'),
+            Column::make('max_delivery_time'),
+            Column::make('status'),
+
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(150)
+                ->addClass('text-center'),
         ];
     }
 

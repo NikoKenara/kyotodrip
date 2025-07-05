@@ -12,12 +12,12 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.delivery-area.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
                         <label>Area Name</label>
-                        <input type="text" name="area-name" class="form-control">
+                        <input type="text" name="area_name" class="form-control">
                     </div>
 
                     <div class="row">
@@ -53,7 +53,7 @@
                         </div>
 
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
             </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\Admin\ProductOptionController;
@@ -48,6 +49,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     // Product Option Routes
     Route::resource('product-option', ProductOptionController::class);
+
+    //Coupon
+
+    //Delivery Area routes
+    Route::resource('delivery-area', DeliveryAreaController::class);
 
     // Setting Routes
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg main_menu">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="http://kyotodrip.test/">
                 <img src="images/logo.png" alt="Restaurant" class="img-fluid">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -48,7 +48,7 @@
                     </li> --}}
                 </ul>
                 <ul class="menu_icon d-flex flex-wrap">
-                    <li>
+                    {{-- <li>
                         <a href="#" class="menu_search"><i class="far fa-search"></i></a>
                         <div class="fp__search_form">
                             <form>
@@ -57,12 +57,12 @@
                                 <button type="submit">search</button>
                             </form>
                         </div>
-                    </li>
+                    </li> --}}
                     <li>
                         <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span class="cart_count">{{ count(Cart::content()) }}</span></a>
                     </li>
                     <li>
-                        <a href="dashboard.html"><i class="fas fa-user"></i></a>
+                        <a href="http://kyotodrip.test/login"><i class="fas fa-user"></i></a>
                     </li>
                     <li>
                         <a class="common_btn" href="#" data-bs-toggle="modal"

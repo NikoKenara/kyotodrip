@@ -7,15 +7,20 @@
                                         <div class="fp_dashboard_address">
                                             <div class="fp_dashboard_existing_address">
                                                 <div class="row">
+                                                    @foreach ($userAddress as $address)
                                                     <div class="col-md-6">
                                                         <div class="fp__checkout_single_address">
                                                             <div class="form-check">
                                                                 <label class="form-check-label">
-                                                                    <span class="icon"><i class="fas fa-home"></i>
-                                                                        home</span>
-                                                                    <span class="address">house# 22, road# 10, block# G,
-                                                                        Basundhara
-                                                                        Residential Area.</span>
+                                                                    <span class="icon">
+                                                                        @if ($address->type === 'home')
+                                                                        <i class="fas fa-home"></i>
+                                                                        @else
+                                                                        <i class="far fa-car-building"></i>
+                                                                        @endif
+
+                                                                        {{ $address->type }}</span>
+                                                                    <span class="address">{{ $address->deliveryArea?->area_name }}</span>
                                                                 </label>
                                                             </div>
                                                             <ul>
@@ -28,28 +33,8 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="fp__checkout_single_address">
-                                                            <div class="form-check">
-                                                                <label class="form-check-label">
-                                                                    <span class="icon"><i
-                                                                            class="far fa-car-building"></i>
-                                                                        office</span>
-                                                                    <span class="address">house# 22, road# 10, block# G,
-                                                                        Basundhara
-                                                                        Residential Area.</span>
-                                                                </label>
-                                                            </div>
-                                                            <ul>
-                                                                <li><a class="dash_edit_btn"><i
-                                                                            class="far fa-edit"></i></a>
-                                                                </li>
-                                                                <li><a class="dash_del_icon"><i
-                                                                            class="fas fa-trash-alt"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
+
                                                 </div>
                                             </div>
                                             <div class="fp_dashboard_new_address ">

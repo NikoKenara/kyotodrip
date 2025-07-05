@@ -102,7 +102,7 @@
                                                             <div class="fp__check_single_form check_area">
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="type" id="flexRadioDefault1">
+                                                                        name="type" id="flexRadioDefault1" value="home">
                                                                     <label class="form-check-label"
                                                                         for="flexRadioDefault1">
                                                                         home
@@ -110,7 +110,7 @@
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="type" id="flexRadioDefault2">
+                                                                        name="type" id="flexRadioDefault2" value="office">
                                                                     <label class="form-check-label"
                                                                         for="flexRadioDefault2">
                                                                         office

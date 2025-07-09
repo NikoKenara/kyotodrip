@@ -6,7 +6,7 @@
         <div class="fp_dashboard_address">
             <div class="fp_dashboard_existing_address">
                 <div class="row">
-                    @foreach ($userAddress as $address)
+                    @foreach ($userAddresses as $address)
                         <div class="col-md-6">
                             <div class="fp__checkout_single_address">
                                 <div class="form-check">
@@ -24,7 +24,9 @@
                                     </label>
                                 </div>
                                 <ul>
-                                    <li><a class="dash_edit_btn"><i class="far fa-edit"></i></a>
+                                    <li><a class="dash_edit_btn show_edit_section"
+                                            data-class="edit_section_{{ $address->id }}"><i
+                                                class="far fa-edit"></i></a>
                                     </li>
                                     <li><a class="dash_del_icon"><i class="fas fa-trash-alt"></i></a>
                                     </li>
@@ -107,79 +109,94 @@
                     </div>
                 </form>
             </div>
-            <div class="fp_dashboard_edit_address ">
-                <form action="" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="row">
-                        <div class="col-12">
-                            <h4>Edit Address</h4>
-                        </div>
+            @foreach ($userAddresses as $address)
+                <div class="fp_dashboard_edit_address edit_section_{{ $address->id }}">
+                    <form action="" method="Post">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Edit Address</h4>
+                            </div>
 
-                        <div class="col-md-12 col-lg-12 col-xl-12">
-                            <div class="fp__check_single_form">
-                                <select id="select_js4" name="area">
-                                    <option value="">select Area</option>
-                                    @foreach ($deliveryAreas as $area)
-                                        <option value="{{ $area->id }}">{{ $area->area_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            <div class="fp__check_single_form">
-                                <input type="text" placeholder="First Name" name="first_name">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            <div class="fp__check_single_form">
-                                <input type="text" placeholder="Last Name" name="last_name">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            <div class="fp__check_single_form">
-                                <input type="text" placeholder="Phone" name="phone">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-12 col-xl-6">
-                            <div class="fp__check_single_form">
-                                <input type="text" placeholder="Email" name="email">
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 col-lg-12 col-xl-12">
-                            <div class="fp__check_single_form">
-                                <textarea cols="3" rows="4" placeholder="Address" name="address"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="fp__check_single_form check_area">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="type"
-                                        id="flexRadioDefault1" value="home">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        home
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="type"
-                                        id="flexRadioDefault2" value="office">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        office
-                                    </label>
+                            <div class="col-md-12 col-lg-12 col-xl-12">
+                                <div class="fp__check_single_form">
+                                    <select id="select_js4" name="area">
+                                        <option value="">select Area</option>
+                                        @foreach ($deliveryAreas as $area)
+                                            <option value="{{ $area->id }}">{{ $area->area_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-6 col-lg-12 col-xl-6">
+                                <div class="fp__check_single_form">
+                                    <input type="text" placeholder="First Name" name="first_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12 col-xl-6">
+                                <div class="fp__check_single_form">
+                                    <input type="text" placeholder="Last Name" name="last_name">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-12 col-xl-6">
+                                <div class="fp__check_single_form">
+                                    <input type="text" placeholder="Phone" name="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12 col-xl-6">
+                                <div class="fp__check_single_form">
+                                    <input type="text" placeholder="Email" name="email">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12 col-xl-12">
+                                <div class="fp__check_single_form">
+                                    <textarea cols="3" rows="4" placeholder="Address" name="address"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="fp__check_single_form check_area">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="type"
+                                            id="flexRadioDefault1" value="home">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            home
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="type"
+                                            id="flexRadioDefault2" value="office">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            office
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="common_btn cancel_edit_address">cancel</button>
+                                <button type="submit" class="common_btn">save
+                                    address</button>
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <button type="button" class="common_btn cancel_edit_address">cancel</button>
-                            <button type="submit" class="common_btn">save
-                                address</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.show_edit_section').on('click', function() {
+                let className = $(this).data('class');
+                $('.fp_dashboard_edit_address').removeClass('d-block');
+                $('.fp_dashboard_existing_address').addClass('d-none');
+                $('.'+className).addClass('d-block');
+            })
+        })
+    </script>
+@endpush

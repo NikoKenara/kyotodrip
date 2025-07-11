@@ -50,4 +50,15 @@ class DashboardController extends Controller
 
         return to_route('admin.dashboard');
     }
+
+    function destroyAddress(string $id) {
+        $address = Address::findOrFail($id);
+        if($address && $address->user_id === auth()->user()->id){
+            $address->delete();
+
+            return response(['status' => 'success', 'message' => 'Deleted Successfully']);
+        }
+
+        return response(['status' => 'error', 'message' => 'Something went wrong']);
+    }
 }

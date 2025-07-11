@@ -29,7 +29,7 @@
                                             data-class="edit_section_{{ $address->id }}"><i
                                                 class="far fa-edit"></i></a>
                                     </li>
-                                    <li><a class="dash_del_icon"><i class="fas fa-trash-alt"></i></a>
+                                    <li><a href="{{ route('address.destroy', $address->id) }}" class="dash_del_icon delete-item"><i class="fas fa-trash-alt"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -122,7 +122,7 @@
 
                             <div class="col-md-12 col-lg-12 col-xl-12">
                                 <div class="fp__check_single_form">
-                                    <select id="select_js4" name="area">
+                                    <select class="nice-select" name="area">
                                         <option value="">select Area</option>
                                         @foreach ($deliveryAreas as $area)
                                             <option @selected($address->delivery_area_id === $area->id) value="{{ $area->id }}">{{ $area->area_name }}</option>

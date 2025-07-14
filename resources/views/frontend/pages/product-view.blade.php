@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                    BREADCRUMB START
-                                ==============================-->
+                                        BREADCRUMB START
+                                    ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                    BREADCRUMB END
-                                ==============================-->
+                                        BREADCRUMB END
+                                    ==============================-->
 
 
     <!--=============================
-                                    MENU DETAILS START
-                                ==============================-->
+                                        MENU DETAILS START
+                                    ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -84,14 +84,15 @@
                                     <h5>select size</h5>
 
                                     @foreach ($product->productSizes as $productSize)
-                                    <div class="form-check">
-                                        <input class="form-check-input v_product_size" type="radio" name="product_size"
-                                            id="option-{{ $productSize->id }}" data-price="{{ $productSize->price }}"
-                                            value="{{ $productSize->id }}">
-                                        <label class="form-check-label" for="option-{{ $productSize->id }}">
-                                            {{ $productSize->name }} <span>+ {{ currencyPosition($productSize->price) }}</span>
-                                        </label>
-                                    </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input v_product_size" type="radio"
+                                                name="product_size" id="option-{{ $productSize->id }}"
+                                                data-price="{{ $productSize->price }}" value="{{ $productSize->id }}">
+                                            <label class="form-check-label" for="option-{{ $productSize->id }}">
+                                                {{ $productSize->name }} <span>+
+                                                    {{ currencyPosition($productSize->price) }}</span>
+                                            </label>
+                                        </div>
                                     @endforeach
 
                                 </div>
@@ -133,10 +134,10 @@
 
 
                         <ul class="details_button_area d-flex flex-wrap">
-                            @if($product->quantity === 0)
-                            <li><a class="common_btn bg-danger" href="javascript:;">Out of Stock</a></li>
+                            @if ($product->quantity === 0)
+                                <li><a class="common_btn bg-danger" href="javascript:;">Out of Stock</a></li>
                             @else
-                            <li><a class="common_btn v_submit_button" href="#">add to cart</a></li>
+                                <li><a class="common_btn v_submit_button" href="#">add to cart</a></li>
                             @endif
                             <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
                         </ul>
@@ -310,10 +311,11 @@
                                             @else
                                                 {{ currencyPosition($product->price) }}
                                             @endif
-
                                         </h5>
                                         <ul class="d-flex flex-wrap justify-content-center">
-                                            <li><a href="javascript:;" onclick="loadProductModal('{{ $relatedProduct->id }}')"><i class="fas fa-shopping-basket"></i></a></li>
+                                            <li><a href="javascript:;"
+                                                    onclick="loadProductModal('{{ $relatedProduct->id }}')"><i
+                                                        class="fas fa-shopping-basket"></i></a></li>
                                             <li><a href="#"><i class="fal fa-heart"></i></a></li>
                                             <li><a href="#"><i class="far fa-eye"></i></a></li>
                                         </ul>

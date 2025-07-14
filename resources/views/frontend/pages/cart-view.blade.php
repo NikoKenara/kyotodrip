@@ -124,7 +124,7 @@
                             <input type="text" placeholder="Coupon Code">
                             <button type="submit">apply</button>
                         </form>
-                        <a class="common_btn" href=" #">checkout</a>
+                        <a class="common_btn" href="{{ route('checkout.index') }}">checkout</a>
                     </div>
                 </div>
             </div>

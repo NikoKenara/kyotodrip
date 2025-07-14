@@ -9,21 +9,28 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    function index(){
+    function index()
+    {
         $addresses = Address::where(['user_id' => auth()->user()->id])->get();
         $deliveryAreas = DeliveryArea::where('status', 1)->get();
         return view('frontend.pages.checkout', compact('addresses', 'deliveryAreas'));
     }
 
-    function CalculateDeliveryCharge(string $id) {
+    function CalculateDeliveryCharge(string $id)
+    {
         try {
             $address = Address::findOrFail($id);
-        $deliveryFee = $address->deliveryArea?->delivery_fee;
-        $grandTotal = cartTotal() + $deliveryFee;
-        return response(['delivery_fee' => $deliveryFee, 'grand_total' => $grandTotal]);
-        }catch(\Exception $e) {
+            $deliveryFee = $address->deliveryArea?->delivery_fee;
+            $grandTotal = cartTotal() + $deliveryFee;
+            return response(['delivery_fee' => $deliveryFee, 'grand_total' => $grandTotal]);
+        } catch (\Exception $e) {
             logger($e);
             return response(['message' => 'Something went Wrong'], 422);
         }
+    }
+
+    function checkRedirect(Request $request)
+    {
+        dd($request->all());
     }
 }

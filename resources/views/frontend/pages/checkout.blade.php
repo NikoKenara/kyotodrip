@@ -231,7 +231,7 @@
                     showLoader()
                 },
                 success: function(response) {
-                    //
+                    window.location.href = response.redirect_url;
                 },
                 error: function(xhr, status, error) {
                     let errorMessage = xhr.responseJSON.message;

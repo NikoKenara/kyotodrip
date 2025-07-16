@@ -67,7 +67,7 @@ if(!function_exists('productTotal')) {
             $productPrice = $product->price;
             $sizePrice = $product->options?->product_size['price'] ?? 0;
             $optionsPrice = 0;
-            
+
             foreach ($product->options->product_options as $option) {
                 $optionsPrice += $option['price'];
             }
@@ -75,5 +75,25 @@ if(!function_exists('productTotal')) {
             $total += ($productPrice + $sizePrice + $optionsPrice) * $product->qty;
 
         return $total;
+    }
+}
+
+// grand cart total
+
+if(!function_exists('grandCartTotal')){
+    function grandCartTotal($deliveryFee = 0)
+    {
+        $total = 0;
+        $cartTotal = cartTotal();
+
+        if(session()->has('coupon')){
+            $discount = session()->get('coupon')['discount'];
+            $total = ($cartTotal + $deliveryFee) - $discount;
+
+            return $total;
+        }else{
+            $total = $cartTotal + $deliveryFee;
+            return $total;
+        }
     }
 }

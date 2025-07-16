@@ -77,7 +77,7 @@
                                             </td>
 
                                             <td class="fp__pro_status">
-                                                <h6>{{ currencyPosition($product->price) }}</h6>
+                                                <h6 >{{ currencyPosition($product->price) }}</h6>
                                             </td>
 
                                             <td class="fp__pro_select">

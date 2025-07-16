@@ -21,7 +21,7 @@ class CheckoutController extends Controller
         try {
             $address = Address::findOrFail($id);
             $deliveryFee = $address->deliveryArea?->delivery_fee;
-            $grandTotal = cartTotal() + $deliveryFee;
+            $grandTotal = grandCartTotal() + $deliveryFee;
             return response(['delivery_fee' => $deliveryFee, 'grand_total' => $grandTotal]);
         } catch (\Exception $e) {
             logger($e);
@@ -29,8 +29,7 @@ class CheckoutController extends Controller
         }
     }
 
-    function checkoutRedirect(Request $request)
-    {
+    function checkoutRedirect(Request $request){
         $request->validate([
             'id' => ['required', 'integer']
         ]);
@@ -39,7 +38,8 @@ class CheckoutController extends Controller
 
         $selectedAddress = $address->address. ', Area: '. $address->deliveryArea?->area_name;
 
-        session('address', $selectedAddress);
+        session()->put('address', $selectedAddress);
+        session()->put('delivery_fee', $address->deliveryArea->delivery_fee);
 
         return response(['redirect_url' => route('payment.index')]);
     }

@@ -31,7 +31,7 @@
             <span class="loader"></span>
         </div>
     </div>
-    {{-- @dd(Cart::content()); --}}
+    @dd(Cart::content());
 
     <!--=============================
         Cart Popup Modal S tart

@@ -412,7 +412,7 @@
                 let formData = $(this).serialize();
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route('add-to-cart') }}',
+                    url: '{{ route("add-to-cart") }}',
                     data: formData,
                     beforeSend: function() {
                         $('.v_submit_button').attr('disabled', true);

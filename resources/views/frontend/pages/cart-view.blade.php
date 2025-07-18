@@ -61,15 +61,13 @@
 
                                     @foreach (Cart::content() as $product)
                                         <tr>
-                                            <td class="fp__pro_img"><img
-                                                    src="{{ $product->options->product_info['image'] }}" alt="product"
-                                                    class="img-fluid w-100">
+                                            <td class="fp__pro_img"><img src="{{ $product->options->product_info['image'] }}" alt="product" class="img-fluid w-100">
                                             </td>
 
                                             <td class="fp__pro_name">
                                                 <a
                                                     href="{{ route('product.show', $product->options->product_info['slug']) }}">{{ $product->name }}</a>
-                                                <span>{{ @$product->options->product_size['name'] }}
+                                                <span>{{ @ $product->options->product_size['name'] }}
                                                     {{ @$product->options->product_size['price'] ? currencyPosition(@$product->options->product_size['price']) : '' }}</span>
                                                 @foreach ($product->options->product_options as $option)
                                                     <p>{{ $option['name'] }} ({{ currencyPosition($option['price']) }})</p>
@@ -77,7 +75,7 @@
                                             </td>
 
                                             <td class="fp__pro_status">
-                                                <h6 >{{ currencyPosition($product->price) }}</h6>
+                                                <h6>{{ currencyPosition($product->price) }}</h6>
                                             </td>
 
                                             <td class="fp__pro_select">

@@ -79,7 +79,6 @@ if(!function_exists('productTotal')) {
 }
 
 // grand cart total
-
 if(!function_exists('grandCartTotal')){
     function grandCartTotal($deliveryFee = 0)
     {
@@ -95,5 +94,18 @@ if(!function_exists('grandCartTotal')){
             $total = $cartTotal + $deliveryFee;
             return $total;
         }
+    }
+}
+
+// generate invoice id
+if (!function_exists('generateInvoiceId')) {
+    function generateInvoiceId()
+    {
+        $randomNumber = rand(1, 9999);
+        $currentDateTime = now();
+
+        $invoiceId = $randomNumber . $currentDateTime->format('yd') . $currentDateTime->format('s');
+
+        return $invoiceId;
     }
 }

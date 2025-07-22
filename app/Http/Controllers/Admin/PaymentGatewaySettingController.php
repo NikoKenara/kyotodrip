@@ -11,4 +11,8 @@ class PaymentGatewaySettingController extends Controller
     function index(): View {
         return view('admin.payment_setting.index');
     }
+
+    function paypalSettingUpdate(Request $request) {
+        dd($request->all());
+    }
 }

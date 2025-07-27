@@ -61,15 +61,15 @@
                                     aria-controls="v-pills-profile" aria-selected="false"><span><i
                                             class="fas fa-bags-shopping"></i></span> Order</button>
 
-                                <button class="nav-link" id="v-pills-messages-tab2" data-bs-toggle="pill"
+                                {{-- <button class="nav-link" id="v-pills-messages-tab2" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-messages2" type="button" role="tab"
                                     aria-controls="v-pills-messages2" aria-selected="false"><span><i
-                                            class="far fa-heart"></i></span> wishlist</button>
+                                            class="far fa-heart"></i></span> wishlist</button> --}}
 
-                                <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
+                                {{-- <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-messages" type="button" role="tab"
                                     aria-controls="v-pills-messages" aria-selected="false"><span><i
-                                            class="fas fa-star"></i></span> Reviews</button>
+                                            class="fas fa-star"></i></span> Reviews</button> --}}
 
                                 <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-settings" type="button" role="tab"
@@ -102,19 +102,19 @@
                                                 <div class="col-xl-4 col-sm-6 col-md-4">
                                                     <div class="fp__dsahboard_overview_item">
                                                         <span class="icon"><i class="far fa-shopping-basket"></i></span>
-                                                        <h4>total order <span>(76)</span></h4>
+                                                        <h4>total order <span>(00)</span></h4>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-sm-6 col-md-4">
                                                     <div class="fp__dsahboard_overview_item green">
                                                         <span class="icon"><i class="far fa-shopping-basket"></i></span>
-                                                        <h4>Completed <span>(71)</span></h4>
+                                                        <h4>Completed <span>(00)</span></h4>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-sm-6 col-md-4">
                                                     <div class="fp__dsahboard_overview_item red">
                                                         <span class="icon"><i class="far fa-shopping-basket"></i></span>
-                                                        <h4>cancel <span>(05)</span></h4>
+                                                        <h4>cancel <span>(00)</span></h4>
                                                     </div>
                                                 </div>
                                             </div>

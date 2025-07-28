@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg main_menu">
         <div class="container">
-            <a class="navbar-brand" href="http://kyotodrip.test/">
-                <img src="images/logo.png" alt="Restaurant" class="img-fluid">
+            <a href="{{ url('/') }}"  class="d-flex align-items-center" style="height: 80px;">
+                <img src="{{ asset('frontend/images/kyotodripinvert.jpg') }}" alt="Logo" class="img-fluid">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

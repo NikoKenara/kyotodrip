@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="fp__cart_list_footer_button">
+                    {{-- <div class="fp__cart_list_footer_button">
                         <h6>total cart</h6>
                         <p>subtotal: <span>$124.00</span></p>
                         <p>delivery: <span>$00.00</span></p>
@@ -123,6 +123,18 @@
                             <button type="submit">apply</button>
                         </form>
                         <a class="common_btn" href="{{ route('checkout.index') }}">checkout</a>
+                    </div> --}}
+                    <div id="sticky_sidebar" class="fp__cart_list_footer_button">
+                        <h6>total cart</h6>
+                        <p>subtotal: <span>{{ currencyPosition(cartTotal()) }}</span></p>
+                        <p>delivery: <span id="delivery_fee">Rp0</span></p>
+                        {{-- <p>discount: <span>$10.00</span></p> --}}
+                        <p class="total"><span>total:</span> <span id="grand_total">{{ currencyPosition(cartTotal()) }}</span></p>
+                        {{-- <form>
+                            <input type="text" placeholder="Coupon Code">
+                            <button type="submit">apply</button>
+                        </form> --}}
+                        <a class="common_btn" id="proceed_pmt_button" href="{{ route('checkout.index') }}">checkout</a>
                     </div>
                 </div>
             </div>

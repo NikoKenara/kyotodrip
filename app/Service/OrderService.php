@@ -42,6 +42,9 @@ class OrderService
                 $orderItem->save();
             }
 
+            // putting grand total amount in session
+            session()->put('grand_total', $order->grand_total);
+
             return true;
         }catch(\Exception $e){
             logger($e);

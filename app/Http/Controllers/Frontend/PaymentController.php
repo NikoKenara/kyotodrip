@@ -104,7 +104,13 @@ class PaymentController extends Controller
             ]
         ]);
 
-        dd($response);
+        if(isset($response['id']) && $response['id'] != NULL){
+            foreach($response['links'] as $link){
+                if($link['rel'] === 'approve'){
+                    return redirect()->away($link['href']);
+                }
+            }
+        }
     }
     function paypalSuccess()
     {

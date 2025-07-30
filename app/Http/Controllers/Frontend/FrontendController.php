@@ -49,4 +49,11 @@ class FrontendController extends Controller
 
         return view('frontend.layouts.ajax-files.product-popup-modal', compact('product'))->render();
     }
+
+    public function product() {
+
+        $categories = Category::where(['show_at_home' => 1, 'status' => 1])->get();
+
+        return view('frontend.pages.product', compact('categories'));
+    }
 }

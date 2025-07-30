@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg main_menu">
         <div class="container">
-            <a href="{{ url('/') }}"  class="d-flex align-items-center" style="height: 80px;">
+            <a href="{{ url('/') }}"  class="d-flex align-items-center" style="height: 79px;">
                 <img src="{{ asset('frontend/images/kyotodripinvert.jpg') }}" alt="Logo" class="img-fluid">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -10,13 +10,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">about</a>
+                        <a class="nav-link" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="menu.html">menu</a>
+                        <a class="nav-link {{ request()->is('product*') ? 'active' : '' }}" href="{{ route('product') }}">Menu</a>
+
                     </li>
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="chefs.html">chefs</a>

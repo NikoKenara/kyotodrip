@@ -4,13 +4,13 @@
     <!--=============================
                         BREADCRUMB START
                     ==============================-->
-    <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
+    <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/kyotodripback.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
                 <div class="fp__breadcrumb_text">
                     <h1>user dashboard</h1>
                     <ul>
-                        <li><a href="#">home</a></li>
+                        <li><a href="{{ url('/') }} ">home</a></li>
                         <li><a href="#">dashboard</a></li>
                     </ul>
                 </div>

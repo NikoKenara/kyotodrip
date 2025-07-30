@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Events\OrderPaymentUpdateEvent;
+use App\Events\OrderPlacedNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Service\OrderService;
 use Illuminate\Http\Request;
@@ -105,9 +106,9 @@ class PaymentController extends Controller
             ]
         ]);
 
-        if(isset($response['id']) && $response['id'] != NULL){
-            foreach($response['links'] as $link){
-                if($link['rel'] === 'approve'){
+        if (isset($response['id']) && $response['id'] != NULL) {
+            foreach ($response['links'] as $link) {
+                if ($link['rel'] === 'approve') {
                     return redirect()->away($link['href']);
                 }
             }
@@ -121,7 +122,7 @@ class PaymentController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
-        if(isset($response['status']) && $response['status'] === 'COMPLETED'){
+        if (isset($response['status']) && $response['status'] === 'COMPLETED') {
 
             $orderId = session()->get('order_id');
 
@@ -133,8 +134,10 @@ class PaymentController extends Controller
             ];
 
             OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, 'PayPal');
+            OrderPlacedNotificationEvent::dispatch($orderId);
 
             dd('success');
+
         }
     }
     function paypalCancel()
